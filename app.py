@@ -30,7 +30,7 @@ external_stylesheets = [
 app = Dash(__name__, external_stylesheets=external_stylesheets)
 server = app.server
 
-app.title = "Restaurant Data Analysis!"
+app.title = "Restaurant Sales Analysis!"
 
 custom_card_style = {
     "border": "1px solid #ccc",
@@ -38,10 +38,18 @@ custom_card_style = {
     "padding": "3px",
     "margin": "1px",
     "width": "500px",  
-    "height": "450px",
+    "height": "400px",
     "background-color": "black",
 }
-
+custom_card_stylen = {
+    "border": "1px solid #ccc",
+    "border-radius": "5px",
+    "padding": "3px",
+    "margin": "1px",
+    "width": "500px",  
+    "height": "350px",
+    "background-color": "black",
+}
 app.layout = html.Div(
     children=[
         html.Div(
@@ -55,6 +63,7 @@ app.layout = html.Div(
                 html.P(
                     children="Sales DASHBOARD",
                     className="header-description",
+                    style = {"fontSize" : "25px"}
                 ),
             ],
             className="header",
@@ -171,12 +180,12 @@ app.layout = html.Div(
                         dcc.Graph(
                             id="profit-chart",
                             config={"displayModeBar": False},
-                            style = custom_card_style,
+                            style = custom_card_stylen,
                         ),
                         dcc.Graph(
                             id="food-chart",
                             config={"displayModeBar": False},
-                            style = custom_card_style,
+                            style = custom_card_stylen,
                         ),
                     ],
                     style = {"display": "flex", "flexDirection": "row", "justifyContent": "space-between",},
@@ -286,7 +295,7 @@ def update_total_amount_and_charts(selected_shift, selected_category, selected_f
                 "tickprefix": "$",
                 "tickfont": {"color": "white"},
             },
-            "colorway": ["#158025"],
+            "colorway": ["#321D69"],
             "plot_bgcolor": "black",
             "paper_bgcolor": "black",
         }
@@ -394,7 +403,9 @@ def update_item_type_comparison(selected_shift, start_date, end_date):
 
     item_type_quantity = filtered_data.groupby("item_type")["quantity"].sum().reset_index()
 
-    custom_colors = ["#FF5733", "#FFBD33"]
+    custom_colors = ["#15216F", "#E9EEF0"]
+    
+    pull_values = [0.1, 0, 0, 0]
     
     item_type_comparison_figure = go.Figure(
         data=[
@@ -404,6 +415,7 @@ def update_item_type_comparison(selected_shift, start_date, end_date):
                 hole=0.3,
                 textinfo="value+percent",
                 marker=dict(colors=custom_colors),
+                pull = pull_values
             )
         ],
         layout={
@@ -412,6 +424,7 @@ def update_item_type_comparison(selected_shift, start_date, end_date):
             "font": {"color": "white"},
             "plot_bgcolor": "black",
             "paper_bgcolor": "black",
+            
         }
     )
     return item_type_comparison_figure  
@@ -426,7 +439,9 @@ def update_shift_comparison( start_date, end_date):
   
     shift_revenue = filtered_data.groupby("shift")["transaction_amount"].sum().reset_index()
 
-    custom_colors = ["#33FFBD", "#33FF57", "#C7FF33", "#FF5733", "#FFBD33"]
+    custom_colors = ["#4484AB", "#1C1954", "#24817D"]
+
+    pull_values = [0.1, 0.1, 0.1, 0]
     
     shift_revenue_comparison_figure = go.Figure(
         data=[
@@ -436,6 +451,7 @@ def update_shift_comparison( start_date, end_date):
                 hole=0.3,
                 textinfo="value+percent",
                 marker=dict(colors=custom_colors),
+                pull = pull_values
             )
         ],
         layout={

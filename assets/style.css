@@ -3,7 +3,7 @@
 body {
     font-family: "Montserrat", sans-serif;
     margin: 0;
-    background-color: #288BA8;
+    background-color: #8E94B3;
 }
 
 .header {
@@ -96,7 +96,7 @@ body {
 }
 
 .card-value {
-    color: #e74c3c;
+    color: #85bb65;
     font-size: 36px;
     margin-top: 10px;
 }
