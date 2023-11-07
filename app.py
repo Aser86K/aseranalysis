@@ -175,21 +175,20 @@ app.layout = html.Div(
                     ),
                     className="card",
                 ),
-                html.Div(  
-                    children=[
-                        dcc.Graph(
-                            id="profit-chart",
-                            config={"displayModeBar": False},
-                            style = custom_card_stylen,
-                        ),
-                        dcc.Graph(
-                            id="food-chart",
-                            config={"displayModeBar": False},
-                            style = custom_card_stylen,
-                        ),
-                    ],
-                    style = {"display": "flex", "flexDirection": "row", "justifyContent": "space-between",},
+                html.Div(
+                    children=dcc.Graph(
+                        id="profit-chart",
+                        config={"displayModeBar": False},
                     ),
+                    className="card",
+                ),
+               html.Div(
+                    children=dcc.Graph(
+                        id="food-chart",
+                        config={"displayModeBar": False},
+                    ),
+                    className="card",
+                ),    
                 html.Div(  
                     children=[
                         dcc.Graph(
@@ -207,6 +206,7 @@ app.layout = html.Div(
                     ),
             ],
             className="wrapper",
+                             
         ),
     ]
 )
